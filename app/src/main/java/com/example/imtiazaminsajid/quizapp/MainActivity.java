@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference users;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +61,16 @@ public class MainActivity extends AppCompatActivity {
         users.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(user).exists()){
-                    if (!user.isEmpty()){
+                if (dataSnapshot.child(user).exists())
+                    {
+                    if (!user.isEmpty())
+                        {
                         User login = dataSnapshot.child(user).getValue(User.class);
 
-                        if (login.getPassword().equals(pwd))
+                        assert login != null;
+                        if (login.getPassword().equals(pwd)) {
                             Toast.makeText(MainActivity.this, "Login OK", Toast.LENGTH_SHORT).show();
+                        }
                         else
                             Toast.makeText(MainActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
                         }
