@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference users;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,9 +99,9 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = this.getLayoutInflater();
         View sign_up_layout = inflater.inflate(R.layout.sign_up_layout, null);
 
-        edtNewUser = (MaterialEditText) findViewById(R.id.edtNewUserName);
-        edtNewPassword = (MaterialEditText) findViewById(R.id.edtNewPassword);
-        edtNewEmail = (MaterialEditText) findViewById(R.id.edtNewEmail);
+        edtNewUser = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewUserName);
+        edtNewPassword = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewPassword);
+        edtNewEmail = (MaterialEditText) sign_up_layout.findViewById(R.id.edtNewEmail);
 
         alertDialog.setView(sign_up_layout);
         alertDialog.setIcon(R.drawable.ic_account_circle_black_24dp);
@@ -116,19 +116,19 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final User user =  new User(edtNewUser.getText().toString(),
+                final User userl =  new User(edtNewUser.getText().toString(),
                         edtNewPassword.getText().toString(),
                         edtNewEmail.getText().toString());
 
                 users.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.child(user.getUserName()).exists())
+                        if (dataSnapshot.child(userl.getUserName()).exists())
                             Toast.makeText(MainActivity.this, "User Already Exist!", Toast.LENGTH_SHORT).show();
 
                         else {
 
-                            users.child(user.getUserName()).setValue(user);
+                            users.child(userl.getUserName()).setValue(userl);
 
                             Toast.makeText(MainActivity.this, "User Registation Success!", Toast.LENGTH_SHORT).show();
                         }
